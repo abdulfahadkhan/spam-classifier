@@ -1,27 +1,24 @@
-# Spam Classifier
+# House Price Prediction
 
-A text classifier that distinguishes spam from ham (non-spam) SMS messages using TF-IDF features and classic ML models.
+Predicts house prices from features like size, bedrooms, location score, and age using Linear Regression (with Ridge/Lasso/Random Forest comparison).
 
-## Dataset
-[SMS Spam Collection (UCI)](https://archive.ics.uci.edu/dataset/228/sms+spam+collection) — 5,574 labeled SMS messages (86.6% ham, 13.4% spam).
-
-## Approach
-1. Preprocessing: lowercasing, punctuation removal, stopword removal
-2. Feature extraction: TF-IDF with unigrams + bigrams
-3. Models compared: Naive Bayes, Logistic Regression (with `class_weight='balanced'`), Linear SVM
+## Steps
+1. Load/generate data
+2. Explore distributions & correlations
+3. Handle missing data (median imputation)
+4. Normalize features (StandardScaler)
+5. Train/test split (80/20)
+6. Train models (Linear Regression, Ridge, Lasso, Random Forest)
+7. Evaluate with MSE, RMSE, MAE, R²
+8. Cross-validation + feature importance
 
 ## Results
-
-| Model | Accuracy | Precision | Recall | F1 |
-|---|---|---|---|---|
-| Naive Bayes | 95.1% | 1.00 | 0.63 | 0.77 |
-| **Logistic Regression (balanced)** | **97.7%** | **0.98** | **0.85** | **0.91** |
-| Linear SVM | 97.1% | 1.00 | 0.79 | 0.88 |
-
-Best model: Logistic Regression with `class_weight='balanced'` and bigram features, balancing precision and recall on the imbalanced dataset.
+- Best model: Ridge (MSE ≈ 619M, R² ≈ 0.92)
+- Top features: size_sqft, location_score
 
 ## Usage
-\`\`\`bash
-pip install -r requirements.txt
-python3 spam_classifier_v2.py
-\`\`\`
+```bash
+pip install pandas numpy scikit-learn matplotlib joblib
+python3 house_price_model.py
+python3 house_price_extended.py
+```
